@@ -113,3 +113,41 @@ git clone <repo-do-grupo> && cd <repo> && make up E=2 && make verificar E=2
 
 Os roteiros imprimem o valor observado em cada ponto, não só passou/falhou —
 dá para corrigir lendo a saída.
+
+---
+
+## Entrega 1 — plano de endereçamento
+
+Duas sub-redes /24, uma por segmento, sem rota entre elas.
+
+| Segmento | Sub-rede     | Máscara       | Endereços totais | Utilizáveis | Faixa utilizável         |
+|----------|--------------|---------------|-------------------|-------------|---------------------------|
+| A        | 10.0.10.0/24 | 255.255.255.0 | 256               | 254         | 10.0.10.1 – 10.0.10.254  |
+| B        | 10.0.20.0/24 | 255.255.255.0 | 256               | 254         | 10.0.20.1 – 10.0.20.254  |
+
+Conta: /24 reserva 8 bits para host → 2^8 = 256 endereços; descontam-se
+`.0` (rede) e `.255` (broadcast), sobrando 254 utilizáveis por sub-rede.
+
+| Contêiner  | Segmento | Endereço IP | Papel                       |
+|------------|----------|-------------|------------------------------|
+| e1-host-a1 | A        | 10.0.10.10  | host                         |
+| e1-host-a2 | A        | 10.0.10.11  | host                         |
+| e1-srv-a   | A        | 10.0.10.20  | servidor HTTP (porta 8080)   |
+| e1-host-b1 | B        | 10.0.20.10  | host                         |
+| e1-host-b2 | B        | 10.0.20.11  | host                         |
+
+### Por que A não alcança B
+
+Cada contêiner teve a rota padrão removida (`ip route del default`), então
+cada host só conhece a rota direta da própria sub-rede. As redes `seg-a` e
+`seg-b` são bridges Docker distintas, sem gateway nem encaminhamento entre
+elas. Ao tentar `host-a1 → host-b1`, o kernel não encontra rota para
+10.0.20.0/24 na tabela local e responde de imediato com **"Network is
+unreachable"** — um erro de camada 3 gerado localmente, sem sequer enviar
+pacote.
+
+Isso é diferente de um timeout: se houvesse rota mas o destino estivesse
+apenas desligado, o ping ficaria esperando resposta. A mensagem específica
+comprova que o isolamento é estrutural (ausência de rota entre as sub-redes),
+não um acidente de host fora do ar — coerente com o teste feito também no
+sentido inverso (`host-b* → srv-a`, `curl` sem resposta, rc=7).

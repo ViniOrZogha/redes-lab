@@ -1,0 +1,31 @@
+
+=== ENTREGA 1 — dois segmentos e um serviço ===
+
+  arquivo lido:        /home/viniciuzortiz/redes-lab/e1-segmentos/docker-compose.yml
+  serviços declarados: host-a1 host-a2 host-b1 host-b2 srv-a 
+
+  [32m OK [0m contêiner e1-host-a1 no ar
+        observado: 10.0.10.10/24
+  [32m OK [0m contêiner e1-host-a2 no ar
+        observado: 10.0.10.11/24
+  [32m OK [0m contêiner e1-srv-a no ar
+        observado: 10.0.10.20/24
+  [32m OK [0m contêiner e1-host-b1 no ar
+        observado: 10.0.20.10/24
+  [32m OK [0m contêiner e1-host-b2 no ar
+        observado: 10.0.20.11/24
+
+  [32m OK [0m A: host-a1 alcança host-a2
+        observado: 64 bytes from 10.0.10.11: icmp_seq=1 ttl=64 time=0.084 ms
+  [32m OK [0m B: host-b1 alcança host-b2
+        observado: 64 bytes from 10.0.20.11: icmp_seq=1 ttl=64 time=0.087 ms
+  [32m OK [0m A: host-a2 obtém a página do servidor
+        observado: servidor srv-a, segmento A, 10.0.10.20
+
+  [32m OK [0m isolamento: A não alcança B (camada 3)
+        observado: ping: connect: Network unreachable
+  [32m OK [0m isolamento: B não chega no servidor de A
+        observado: curl terminou sem resposta (rc=7)
+
+[32mENTREGA 1 COMPLETA[0m — gere as evidências: make evidencias E=1
+

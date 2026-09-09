@@ -26,6 +26,16 @@ services:
     container_name: e1-host-a2
     networks: {seg-a: {ipv4_address: 10.0.10.11}}
 
+  host-b1:
+    <<: *host
+    container_name: e1-host-b1
+    networks: {seg-b: {ipv4_address: 10.0.20.10}}
+
+  host-b2:
+    <<: *host
+    container_name: e1-host-b2
+    networks: {seg-b: {ipv4_address: 10.0.20.11}}
+
   srv-a:
     image: redes-lab-base:1
     container_name: e1-srv-a
