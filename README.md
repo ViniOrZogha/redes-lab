@@ -151,3 +151,16 @@ apenas desligado, o ping ficaria esperando resposta. A mensagem específica
 comprova que o isolamento é estrutural (ausência de rota entre as sub-redes),
 não um acidente de host fora do ar — coerente com o teste feito também no
 sentido inverso (`host-b* → srv-a`, `curl` sem resposta, rc=7).
+
+## Entrega 2  — Relatório Técnica
+
+### Comprovação de Mudança de Cabeçalhos (Wireshark)
+Abaixo estão os prints comparativos dos pacotes ICMP Request capturados nos dois segmentos de rede:
+
+* **Segmento A:
+* **Segmento B:
+
+### Por que o MAC muda e o IP não?
+O endereço **IP não muda** porque opera na Camada 3 (Rede) e possui escopo **global**, servindo para identificar de forma imutável a origem inicial (`10.0.10.10`) e o destino final (`10.0.20.10`) da comunicação através de múltiplos roteadores. 
+
+Já o endereço **MAC muda** a cada salto porque opera na Camada 2 (Enlace) e possui escopo **local**, sendo válido apenas dentro de um mesmo segmento físico. Quando o pacote cruza o roteador, este remove o cabeçalho Ethernet do `seg-a` (onde o destino era o próprio roteador) e reconstrói um novo cabeçalho para o `seg-b`, alterando o MAC de origem para a sua própria interface de saída (`10.0.20.254`) e o MAC de destino para o endereço físico do `host-b1`.
