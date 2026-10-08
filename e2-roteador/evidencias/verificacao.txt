@@ -1,0 +1,26 @@
+
+=== ENTREGA 2 — o roteador e o encapsulamento ===
+
+  [32m OK [0m roteador com repasse IP ligado
+        observado: net.ipv4.ip_forward=1
+  [32m OK [0m roteador com perna nos dois segmentos
+        observado: eth0=10.0.10.254  eth1=10.0.20.254
+
+  [32m OK [0m host-a1 alcança host-b1 (outro segmento)
+        observado: 64 bytes from 10.0.20.10: icmp_seq=1 ttl=63 time=0.083 ms
+  [32m OK [0m o pacote foi ROTEADO (TTL decrementado)
+        observado: ttl=63 (saiu 64, chegou 63: um salto)
+
+  [32m OK [0m controle: host-a2 (sem rota) continua isolado
+        observado: ping: connect: Network unreachable
+
+  capturando nas duas pernas do roteador...
+        perna A: 04:52:57.586315 d6:91:e1:4e:7d:62 > 1e:13:35:2c:26:15, ethertype IPv4 (0x0800), length 98: 10.0.10.10 > 10.0.20.10: ICMP echo request, id 12, seq 1, length 64
+        perna B: 04:52:57.586341 9a:4a:d7:c2:6c:50 > 8e:b2:b3:3e:e6:63, ethertype IPv4 (0x0800), length 98: 10.0.10.10 > 10.0.20.10: ICMP echo request, id 12, seq 1, length 64
+  [32m OK [0m o IP de origem ATRAVESSOU inalterado
+        observado: 10.0.10.10 nos dois lados
+  [32m OK [0m o quadro Ethernet foi REFEITO em cada segmento
+        observado: MAC origem A=d6:91:e1:4e:7d:62  B=9a:4a:d7:c2:6c:50
+
+[32mENTREGA 2 COMPLETA[0m — perna-a.pcap e perna-b.pcap salvos aqui. Abra os dois no Wireshark.
+
