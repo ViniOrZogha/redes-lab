@@ -157,9 +157,11 @@ sentido inverso (`host-b* → srv-a`, `curl` sem resposta, rc=7).
 ### Comprovação de Mudança de Cabeçalhos (Wireshark)
 Abaixo estão os prints comparativos dos pacotes ICMP Request capturados nos dois segmentos de rede:
 
-* **Segmento A:**<img width="1313" height="835" alt="print-seg-a png" src="https://github.com/user-attachments/assets/fe1d63e0-e061-4390-8976-4a30e9202673" />
+* **Segmento A:**<img width="1912" height="1017" alt="print-wireshark-perna-a png" src="https://github.com/user-attachments/assets/5f3d3e64-9d01-41fe-81cc-366c594411be" />
 
-* **Segmento B:**<img width="1312" height="827" alt="print-seg-b png" src="https://github.com/user-attachments/assets/e61f13ff-e620-4ace-861b-6985f1ce3161" />
+
+* **Segmento B:**<img width="1912" height="1017" alt="print-wireshark-perna-b png" src="https://github.com/user-attachments/assets/d23b3a0b-e1ef-4c48-9daf-6082038c3ff8" />
+
 
 
 ### Por que o MAC muda e o IP não?
