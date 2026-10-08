@@ -57,9 +57,9 @@ services:
 networks:
   seg-a:
     driver: bridge
-
+    
     ipam: {config: [{subnet: 10.0.10.0/24}]}
   seg-b:
     driver: bridge
-
+   
     ipam: {config: [{subnet: 10.0.20.0/24}]}
