@@ -1,0 +1,16 @@
+
+=== ENTREGA 3 — o serviço não pode cair ===
+
+  [32m OK [0m com 3 réplicas o serviço responde
+        observado: respondeu replica1 em 0s
+  [32m OK [0m réplica1 fora: o serviço continua
+        observado: respondeu replica2 em 0s
+  [32m OK [0m duas fora: a última réplica sustenta o serviço
+        observado: respondeu replica3 em 0s
+  [32m OK [0m partição de rede: o cliente desiste com aviso claro e sem travar
+        observado: INDISPONIVEL em 3s
+  [32m OK [0m religadas as réplicas, o serviço volta sozinho
+        observado: respondeu replica1
+
+[32mENTREGA 3 COMPLETA[0m
+
