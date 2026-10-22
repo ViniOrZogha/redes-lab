@@ -170,3 +170,21 @@ Abaixo estão os prints comparativos dos pacotes ICMP Request capturados nos doi
 O endereço **IP não muda** porque opera na Camada 3 (Rede) e possui escopo **global**, servindo para identificar de forma imutável a origem inicial (`10.0.10.10`) e o destino final (`10.0.20.10`) da comunicação através de múltiplos roteadores. 
 
 Já o endereço **MAC muda** a cada salto porque opera na Camada 2 (Enlace) e possui escopo **local**, sendo válido apenas dentro de um mesmo segmento físico. Quando o pacote cruza o roteador, este remove o cabeçalho Ethernet do `seg-a` (onde o destino era o próprio roteador) e reconstrói um novo cabeçalho para o `seg-b`, alterando o MAC de origem para a sua própria interface de saída (`10.0.20.254`) e o MAC de destino para o endereço físico do `host-b1`.
+
+# Entrega 3 — O serviço não pode cair
+
+## Morte × partição
+
+Quando uma réplica morre (`docker stop`), o processo termina e o endereço
+deixa de responder: o cliente recebe uma recusa ou um silêncio e passa para a
+próxima réplica. Na partição (`docker network disconnect`), a réplica continua
+viva e funcionando, mas ninguém consegue alcançá-la. Para o cliente, o que
+chega é só silêncio, idêntico ao de uma réplica morta ou apenas lenta. É isso
+que torna a partição mais difícil: o cliente não distingue morte, partição e
+lentidão, e só o tempo limite decide, podendo errar. Além disso, a réplica
+isolada pode continuar aceitando requisições de quem ainda a alcança, e as
+réplicas podem divergir entre si (split brain). Por isso o cliente trata os
+dois casos do mesmo jeito (timeout por réplica e prazo total de 3 s, sempre
+abaixo dos 5 s) e só imprime o nome que veio de uma resposta recebida, sem
+presumir nada sobre quem ficou em silêncio. Assim o usuário não percebe a
+falha de uma réplica, que é a transparência.
