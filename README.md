@@ -157,10 +157,12 @@ sentido inverso (`host-b* → srv-a`, `curl` sem resposta, rc=7).
 ### Comprovação de Mudança de Cabeçalhos (Wireshark)
 Abaixo estão os prints comparativos dos pacotes ICMP Request capturados nos dois segmentos de rede:
 
-* **Segmento A:**<img width="1912" height="1017" alt="print-wireshark-perna-a png" src="https://github.com/user-attachments/assets/5f3d3e64-9d01-41fe-81cc-366c594411be" />
+* **Segmento A:**<img width="1917" height="1018" alt="print-wireshark-perna-a png" src="https://github.com/user-attachments/assets/01513954-9c52-46cd-a3c2-aa9ec4d9310d" />
 
 
-* **Segmento B:**<img width="1912" height="1017" alt="print-wireshark-perna-b png" src="https://github.com/user-attachments/assets/d23b3a0b-e1ef-4c48-9daf-6082038c3ff8" />
+
+* **Segmento B:**<img width="1917" height="1020" alt="print-wireshark-perna-b png" src="https://github.com/user-attachments/assets/be104178-e983-463a-8356-23639160110e" />
+
 
 
 
