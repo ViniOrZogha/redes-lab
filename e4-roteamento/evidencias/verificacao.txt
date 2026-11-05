@@ -1,0 +1,20 @@
+
+=== ENTREGA 4 — a rota se refaz sozinha ===
+
+  [32m OK [0m estado normal: host-a alcança host-b
+        observado: 10.0.20.10 via 10.0.30.12 dev eth1 src 10.0.30.11 uid 0 
+  [32m OK [0m o caminho normal é o CURTO: direto para r2 pelo trânsito 1
+        observado: 10.0.20.10 via 10.0.30.12 dev eth1 src 10.0.30.11 uid 0 
+
+  derrubando o trânsito 1 e cronometrando a recuperação...
+  [32m OK [0m a rede se recuperou sozinha
+        observado: levou 30s — esse é o custo da convergência
+  [32m OK [0m convergiu para o DESVIO por r3 (o caminho de 2 saltos)
+        observado: antes: 10.0.20.10 via 10.0.30.12 dev eth1 src 10.0.30.11 uid 0  / depois: 10.0.20.10 via 10.0.40.13 dev eth2 src 10.0.40.11 uid 0 
+
+  religando o trânsito 1...
+  [32m OK [0m a rede continua de pé com os dois caminhos
+        observado: 10.0.20.10 via 10.0.30.12 dev eth1 src 10.0.30.11 uid 0 
+
+[32mENTREGA 4 COMPLETA[0m
+
