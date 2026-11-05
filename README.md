@@ -171,3 +171,36 @@ O endereço **IP não muda** porque opera na Camada 3 (Rede) e possui escopo **g
 
 Já o endereço **MAC muda** a cada salto porque opera na Camada 2 (Enlace) e possui escopo **local**, sendo válido apenas dentro de um mesmo segmento físico. Quando o pacote cruza o roteador, este remove o cabeçalho Ethernet do `seg-a` (onde o destino era o próprio roteador) e reconstrói um novo cabeçalho para o `seg-b`, alterando o MAC de origem para a sua própria interface de saída (`10.0.20.254`) e o MAC de destino para o endereço físico do `host-b1`.
 
+
+# Entrega 3 — O serviço não pode cair
+
+## Morte × partição
+
+Quando uma réplica morre (`docker stop`), o processo termina e o endereço
+deixa de responder: o cliente recebe uma recusa ou um silêncio e passa para a
+próxima réplica. Na partição (`docker network disconnect`), a réplica continua
+viva e funcionando, mas ninguém consegue alcançá-la. Para o cliente, o que
+chega é só silêncio, idêntico ao de uma réplica morta ou apenas lenta. É isso
+que torna a partição mais difícil: o cliente não distingue morte, partição e
+lentidão, e só o tempo limite decide, podendo errar. Além disso, a réplica
+isolada pode continuar aceitando requisições de quem ainda a alcança, e as
+réplicas podem divergir entre si (split brain). Por isso o cliente trata os
+dois casos do mesmo jeito (timeout por réplica e prazo total de 3 s, sempre
+abaixo dos 5 s) e só imprime o nome que veio de uma resposta recebida, sem
+presumir nada sobre quem ficou em silêncio. Assim o usuário não percebe a
+falha de uma réplica, que é a transparência.
+
+
+# Entrega 4 - A rota se refaz sozinha
+
+Na primeira execução do `make verificar E=4`, a rede levou **22 s** para se recuperar após a queda do trânsito 1; na segunda, **30 s**. A variação vem da fase do temporizador de atualização do RIP (30 s): a falha pode cair logo antes ou logo depois de uma rodada de anúncios. Em ambas, o próximo salto de r1 para 10.0.20.10 mudou de r2 (10.0.30.12, trânsito 1) para r3 (10.0.40.13, o desvio de 2 saltos), o que confirma a convergência real. O custo de convergência desta rede é da ordem de 20 a 30 s.
+
+O tempo piora, e o RIP não é adequado a esse porte:
+
+**Propagação salto a salto.** A notícia da falha anda de vizinho em vizinho, então o pior caso cresce com o diâmetro da rede, não com o número de enlaces.
+**Contagem ao infinito.** Quando a informação ruim circula em laço, a métrica sobe de 1 em 1 até 16 (o "infinito" do RIP), o que pode levar minutos.
+**Limite de 15 saltos.** Destinos além disso ficam inalcançáveis.
+**Tráfego de controle.** Cada roteador reenvia a tabela inteira a cada 30 s, e isso cresce com o tamanho da rede.
+**Detecção por temporizador.** Se a falha não for percebida pela queda da interface, soma-se o timeout de 180 s.
+
+Por isso redes grandes usam protocolos de estado de enlace (OSPF, IS-IS), que inundam só a mudança e recalculam o caminho localmente.
