@@ -1,0 +1,21 @@
+
+=== ENTREGA 5 — o pacote entrega o segredo ===
+
+  [32m OK [0m token do grupo definido
+        observado: Grupo_Larissa_Lucas_Pedro_Vinicius
+  [32m OK [0m roteador com perna no segmento do servidor
+        observado: eth1
+
+  [32m OK [0m HTTP: o cliente entrou na área restrita
+        observado: area restrita do sistema
+  [32m OK [0m HTTP: o segredo do grupo APARECE na captura do roteador
+        observado: 1 pacote(s) contendo "Grupo_Larissa_Lucas_Pedro_Vinicius", em 12 capturados
+
+  [32m OK [0m HTTPS: houve tráfego capturado (a captura está viva)
+        observado: 20 pacote(s)
+  [32m OK [0m HTTPS: o segredo NÃO aparece na captura
+        observado: 0 ocorrências de "Grupo_Larissa_Lucas_Pedro_Vinicius" em 20 pacotes
+
+[32mENTREGA 5 COMPLETA[0m — claro.pcap e cifrado.pcap salvos.
+Abra os dois no Wireshark: a imagem do primeiro é a capa da cartilha.
+

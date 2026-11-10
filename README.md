@@ -204,3 +204,24 @@ O tempo piora, e o RIP não é adequado a esse porte:
 **Detecção por temporizador.** Se a falha não for percebida pela queda da interface, soma-se o timeout de 180 s.
 
 Por isso redes grandes usam protocolos de estado de enlace (OSPF, IS-IS), que inundam só a mudança e recalculam o caminho localmente.
+
+
+# Entrega 5 - Apresentação do publico
+
+Dia 09/11 Apresentando para familia(Vinícius) um integrante.
+Arquivo usado = Cartilha
+Total = 1
+
+**Pergunta**
+O integrante perguntou onde que acha o cadeado.
+
+**Confusão**
+O integrante ficou confuso pra onde olhar no print do Wireshark.
+
+Dia 10/11 Apresentando para famailia(Vinícius) um integrante.
+
+**Pergunta**
+O integrante não teve nenhuma duvida
+
+**Confusão**
+O integrante ficou confuso pra onde olhar no print do Wireshark.

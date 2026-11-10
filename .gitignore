@@ -1,3 +1,5 @@
 *.tmp
 .DS_Store
 # As evidências (.pcap, logs) SÃO a entrega — nunca ignore a pasta evidencias/
+key.pem
+cert.pem
