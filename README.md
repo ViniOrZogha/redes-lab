@@ -209,7 +209,9 @@ Por isso redes grandes usam protocolos de estado de enlace (OSPF, IS-IS), que in
 # Entrega 5 - Apresentação do publico
 
 Dia 09/11 Apresentando para familia(Vinícius) um integrante.
+
 Arquivo usado = Cartilha
+
 Total = 1
 
 **Pergunta**
@@ -220,8 +222,14 @@ O integrante ficou confuso pra onde olhar no print do Wireshark.
 
 Dia 10/11 Apresentando para famailia(Vinícius) um integrante.
 
+Arquivo usado = Cartilha_V2
+
+Total = 1
+
 **Pergunta**
 O integrante não teve nenhuma duvida
 
 **Confusão**
 O integrante ficou confuso pra onde olhar no print do Wireshark.
+<img width="1600" height="1200" alt="WhatsApp Image 2026-11-10 at 18 08 30" src="https://github.com/user-attachments/assets/eb3e80c0-a964-437a-b69d-90cff81ed64b" />
+
